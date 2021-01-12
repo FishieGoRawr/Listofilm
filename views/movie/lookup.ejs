@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Index</title>
+</head>
+
+<body>
+    <%- include('../partials/navbar.ejs') %>
+
+    <div class="container mt-3">
+
+        <div class="row d-flex justify-content-center rounded bg-light">
+            <form action="/movies/lookup" method="POST" class="">
+                <div class="form-group text-center">
+                    <label for="title" class="">Titre du film</label>
+                    <input id="title" name="title" type="text" class="form-control" required>
+                </div>
+
+                <div class="form-group d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary col-12">Chercher</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="row d-flex justify-content-center mt-3 bg-light">
+            <form action="/user/verifyChecked" method="post" class="">
+                <div class="form-group">
+                    <ul style="list-style: none;" class="text-left">
+                        <% if (msg) { %>
+                        <p><%= msg %> </p>
+                        <% } else if (movies) { %>
+                        <% movies.forEach(movie=>{ %>
+                        <li id="<%= movie['id'] %>"><input type="checkbox" name="checked" value="<%= JSON.stringify(movie) %>"> <a href="#" style="color:inherit"><%= movie['title'] %></a> </li>
+                        <% }) %>
+                        <% } else { %>
+                        <p>Veuillez chercher un film dans la barre de recherche ci-haut.</p>
+                        <% } %>
+                    </ul>
+                </div>
+
+                <div class="form-group d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary">Enregistrer les films</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
+</html>
